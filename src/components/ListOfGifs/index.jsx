@@ -1,6 +1,7 @@
+import React from 'react'
 import GifItem from '../GifItem'
 
-export const ListOfGifs = ({ gifs }) => {
+export const ListOfGifs = React.memo(({ gifs }) => {
 
   if (!Array.isArray(gifs) || gifs.length === 0) return <h1>No hay resultados</h1>
 
@@ -9,4 +10,4 @@ export const ListOfGifs = ({ gifs }) => {
       gifs.map(({ title, url: imageUrl, id }) => <GifItem title={title} imageUrl={imageUrl} id={id} key={id} />)
     }
   </section>
-}
+})
