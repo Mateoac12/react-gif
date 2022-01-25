@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 
-export const useObserver = ({ rootMargin = '100px' } = {}) => {
+export const useObserver = ({
+  rootMargin = '100px',
+  onlyOneView = false,
+} = {}) => {
   const [show, setShow] = useState(false)
   const observerRef = useRef()
 
@@ -11,8 +14,10 @@ export const useObserver = ({ rootMargin = '100px' } = {}) => {
       const el = entries[0]
       if (el.isIntersecting) {
         setShow(true)
-        observer.disconnect()
+        return onlyOneView && observer.disconnect()
       }
+
+      return setShow(false)
     }
 
     Promise.resolve(
